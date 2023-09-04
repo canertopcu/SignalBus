@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    float horizontal = 0, vertical = 0;
+    private float horizontal = 0, vertical = 0;
     
 
     // Update is called once per frame
