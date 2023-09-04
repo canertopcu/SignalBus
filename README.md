@@ -78,11 +78,7 @@ Feel free to explore and modify these examples to suit your project's needs.
 ## Contributing
 
 We welcome contributions to SignalBus! If you have ideas for improvements, bug fixes, or new features, please open an issue or submit a pull request. 
-
-## License
-
-SignalBus is open-source software licensed under the MIT License. 
-
+ 
 ---
 
 You can customize this README further by including specific details about your project or any additional sections you find relevant.
