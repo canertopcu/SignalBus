@@ -75,9 +75,9 @@ For a practical demonstration of SignalBus in action, check out the provided exa
 
 Feel free to explore and modify these examples to suit your project's needs.
 
-## Contributing
 
-We welcome contributions to SignalBus! If you have ideas for improvements, bug fixes, or new features, please open an issue or submit a pull request. 
+## License
+
+SignalBus is open-source software licensed under the MIT License. For details, please refer to the [LICENSE](LICENSE) file.
  
-
  
