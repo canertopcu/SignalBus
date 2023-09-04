@@ -70,8 +70,8 @@ SignalBus is incredibly straightforward to use in your Unity projects. Follow th
 
 For a practical demonstration of SignalBus in action, check out the provided example in the repository:
 
-- [InputManager](Scripts/InputManager.cs): This script broadcasts a "Move" signal based on user input.
-- [PlayerController](Scripts/PlayerController.cs): This class listens to the "Move" signal and moves the player character accordingly.
+- [InputManager](Example/InputManager.cs): This script broadcasts a "Move" signal based on user input.
+- [PlayerController](Example/PlayerController.cs): This class listens to the "Move" signal and moves the player character accordingly.
 
 Feel free to explore and modify these examples to suit your project's needs.
 
