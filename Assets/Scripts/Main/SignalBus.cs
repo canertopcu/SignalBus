@@ -5,6 +5,9 @@ namespace Assets.Scripts.Main
 {
     public static class SignalBus
     {
+        // Define a generic delegate for signals without parameters
+        public delegate void SignalHandler();
+
         // Define a generic delegate for signals with one parameter
         public delegate void SignalHandler<T1>(T1 param1);
 
@@ -16,6 +19,18 @@ namespace Assets.Scripts.Main
 
         // Dictionary to store events by name
         private static Dictionary<string, Delegate> events = new Dictionary<string, Delegate>();
+
+
+        // Create or retrieve a generic event by name 
+        private static SignalHandler GetEvent(string eventName)
+        {
+            if (!events.ContainsKey(eventName))
+            {
+                events[eventName] = null; // Initialize as null
+            }
+
+            return events[eventName] as SignalHandler;
+        }
 
         // Create or retrieve a generic event by name for one parameter
         private static SignalHandler<T1> GetEvent<T1>(string eventName)
@@ -51,6 +66,14 @@ namespace Assets.Scripts.Main
         }
 
         // Broadcast a signal with one parameter
+        public static void BroadcastSignal(string eventName)
+        {
+            var signalEvent = GetEvent(eventName);
+            signalEvent?.DynamicInvoke();
+        }
+
+
+        // Broadcast a signal with one parameter
         public static void BroadcastSignal<T1>(string eventName, T1 param1)
         {
             var signalEvent = GetEvent<T1>(eventName);
@@ -69,6 +92,23 @@ namespace Assets.Scripts.Main
         {
             var signalEvent = GetEvent<T1, T2, T3>(eventName);
             signalEvent?.DynamicInvoke(param1, param2, param3);
+        }
+
+        // Subscribe to a signal with a callback without parameter
+        public static void Subscribe(string eventName, SignalHandler listener)
+        {
+            var signalEvent = GetEvent(eventName);
+
+            if (signalEvent == null)
+            {
+                signalEvent = listener; // Create a new event with the provided listener
+                events[eventName] = signalEvent;
+            }
+            else
+            {
+                signalEvent = (SignalHandler)Delegate.Combine(signalEvent, listener);
+                events[eventName] = signalEvent;
+            }
         }
 
         // Subscribe to a signal with a callback for one parameter
@@ -118,6 +158,18 @@ namespace Assets.Scripts.Main
             else
             {
                 signalEvent = (SignalHandler<T1, T2, T3>)Delegate.Combine(signalEvent, listener);
+                events[eventName] = signalEvent;
+            }
+        }
+
+        // Unsubscribe from a signal for without parameter
+        public static void Unsubscribe(string eventName, SignalHandler listener)
+        {
+            var signalEvent = GetEvent(eventName);
+
+            if (signalEvent != null)
+            {
+                signalEvent = (SignalHandler)Delegate.Remove(signalEvent, listener);
                 events[eventName] = signalEvent;
             }
         }
